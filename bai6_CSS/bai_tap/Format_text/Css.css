@@ -1,0 +1,39 @@
+h1{
+    border: 1px solid black;
+    padding: 10px;
+    width:2000px;
+    height:50px;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-top-style: hidden;
+    text-align: justify;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    color: pink;
+}
+#introduction{
+    margin-top: -20px;
+    margin-bottom: 50px;
+    color: yellow;
+}
+#par1{
+    text-indent: 70px;
+    text-align: justify;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: aqua;
+}
+#par2 {
+    text-indent: 70px;
+    text-align: justify;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: aquamarine;
+}
+#par3{
+    text-indent: 70px;
+    text-align: justify;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: cornflowerblue;
+}
