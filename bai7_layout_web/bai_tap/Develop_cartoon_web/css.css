@@ -1,0 +1,134 @@
+header {
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    background-color: lightpink;
+    margin-top: -10px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.logo {
+    width: 100%;
+    background-color: lightpink;
+    height: 100px;
+    padding: 0;
+}
+
+.headerlink {
+    margin-top: 10px;
+    width: 100%;
+    height: 30px;
+    background-color: lightpink;
+    text-align: center;
+}
+
+.link1:hover {
+    color: red;
+}
+
+.link2:hover {
+    color: red;
+}
+
+.link3:hover {
+    color: red;
+}
+
+.link4:hover {
+    color: red;
+}
+
+.link1 {
+    border-right: 1px black solid;
+    padding: 5px 15px;
+    display: inline-block;
+}
+
+.link2 {
+    border-right: 1px black solid;
+    padding: 5px 15px;
+    display: inline-block;
+}
+
+.link3 {
+    border-right: 1px black solid;
+    padding: 5px 15px;
+    display: inline-block;
+}
+
+.link4 {
+    padding: 5px 15px;
+    position: relative;
+    display: inline-block;
+}
+
+footer {
+    position: fixed;
+    background-color: lightpink;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#content {
+    position: relative;
+    top: 144px;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    z-index: -2;
+}
+
+.left-content {
+    width: 30%;
+    margin-right: 10px;
+}
+
+.video {
+    width: 430px;
+    height: 310px;
+}
+
+.right-content {
+    width: 70%;
+    margin-left: 10px;
+    display: block;
+    padding: 20px;
+}
+
+.background-header {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    top: -50px;
+    background-color: white;
+    z-index: -1;
+}
+
+.big-video {
+    width: 1150px;
+    height: 750px;
+}
+
+.content-video {
+    word-wrap: break-word;
+}
+
+@media screen and (max-width:1024px){
+    .right-content{
+        width:100%;
+        height:auto;
+        text-align: center;
+    }
+    .big-video {
+        width: 800px;
+        height: 600px;
+    }
+    .left-content{
+        display: none;
+    }
+}

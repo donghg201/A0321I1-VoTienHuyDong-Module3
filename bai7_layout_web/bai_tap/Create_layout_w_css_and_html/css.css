@@ -1,0 +1,38 @@
+body {
+    font-family: Verdana,sans-serif;
+    font-size: 0.9em;
+}
+
+header, footer {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: black;
+}
+
+footer{
+    clear: both;
+}
+
+nav ul {
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 5px;
+}
+
+section .section1 {
+    width:66.6%;
+    float:left;
+}
+
+section .section2{
+    width:33.3%;
+    float: right;
+}
+
+.title{
+    text-align: center;
+}
