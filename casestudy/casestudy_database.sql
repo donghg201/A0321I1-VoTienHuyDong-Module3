@@ -219,10 +219,10 @@ insert into hop_dong values(2,2,2,2,20211124,20211126,1000000,500000000);
 insert into hop_dong values(3,3,3,3,20211125,20211127,1000000,200000000);
 insert into hop_dong values(4,1,4,3,20211126,20211128,1000000,200000000);
 insert into hop_dong values(5,1,4,2,20211128,20211129,1000000,200000000);
-insert into hop_dong values(10,1,5,4,20191129,20191130,1000000,200000000);
+insert into hop_dong values(10,1,2,1,20191129,20191130,1000000,200000000);
 insert into hop_dong values(11,2,6,1,20191130,20191203,1000000,200000000);
 insert into hop_dong values(12,3,7,2,20191201,20191205,1000000,200000000);
- 
+
 insert into hop_dong_chi_tiet values(1,1,1,1);
 insert into hop_dong_chi_tiet values(2,2,2,2);
 insert into hop_dong_chi_tiet values(3,3,3,3);
@@ -500,17 +500,117 @@ call sp_2(16,3,3,3,20140412,20140501,100000,200000000);
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  yêu cầu 24  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 delimiter $$
-create definer=current_user trigger tr_1 after delete on hop_dong
+create trigger tr_1 after delete on hop_dong
 for each row
 begin
-declare result int;
-select count(hop_dong.id_hop_dong) from hop_dong limit 1 into result;
-select * from hop_dong;
+set @a = (select count(*) from hop_dong);
 end $$
 delimiter ;
 
 drop trigger tr_1;
 
-delete from hop_dong where hop_dong.id_hop_dong = 10;
+set @a = 0;
+delete from hop_dong where hop_dong.id_hop_dong = 5;
+select @a as "Total amount deleted";
+
+-- set biến trung gian để in bảng ra console bằng trigger
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  yêu cầu 25  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+delimiter $$
+create trigger tr_2 before update on hop_dong
+for each row
+begin
+if datediff(new.ngay_lam_hop_dong, old.ngay_ket_thuc) <2
+then signal sqlstate '45000' set message_text = "Ngày kết thúc hợp đồng phải lớn hơn ngày làm hợp đồng ít nhất là 2 ngày";
+end if;
+end; $$
+delimiter ;
+
+drop trigger tr_2;
+
+update `casestudy`.`hop_dong`
+set `ngay_ket_thuc` = '20211128'
+where (`id_hop_dong` = 5);
+
+-- dùng signal sqlstate '45000' set message_text = ... để quăng lỗi
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  yêu cầu 26  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+delimiter //
+drop function if exists func_1 //
+create function func_1() returns int
+deterministic
+begin
+create temporary table temp 
+(select count(distinct id_dich_vu) from hop_dong 
+where id_dich_vu in (select distinct id_dich_vu from hop_dong)	group by id_dich_vu 
+having sum(tong_tien) > 2000000);    
+set @tong_so_dich_vu = (select count(*) from temp);
+drop temporary table temp;
+return @tong_so_dich_vu;
+end;
+select func_1() as "Số lượng dịch vụ có tổng tiền trên 2000000";
+
+-- temporary table: bảng phụ
+
+delimiter //
+drop function if exists func_2 //
+create function func_2( id_khach_hang int) returns int
+deterministic
+begin
+set @time_dai_nhat = (select max(datediff(hop_dong.ngay_ket_thuc, hop_dong.ngay_lam_hop_dong)) from hop_dong
+where hop_dong.id_khach_hang = id_khach_hang);
+return @time_dai_nhat;
+end;
+select func_2(4) as "Thời gian dài nhất";
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  yêu cầu 27  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+delimiter //
+drop procedure if exists sp_3 //
+create procedure sp_3()
+begin
+	declare dich_vu int default 0;
+    declare is_done int default 0;
+    declare con_tro cursor for
+    select dich_vu.id_dich_vu
+    from dich_vu inner join hop_dong on dich_vu.id_dich_vu = hop_dong.id_dich_vu
+    inner join loai_dich_vu on dich_vu.id_loai_dich_vu = loai_dich_vu.id_loai_dich_vu
+    where loai_dich_vu.ten_loai_dich_vu = "room" and year(hop_dong.ngay_lam_hop_dong) between "2015" and "2025";
+    declare continue handler for not found set is_done = 1;
+    open con_tro;
+    get_list: loop
+    fetch from con_tro into dich_vu;
+    if is_done = 1 then
+    leave get_list;
+    end if;
+    delete from hop_dong where hop_dong.id_dich_vu = dich_vu;
+    delete from dich_vu where dich_vu.id_dich_vu = dich_vu;
+    fetch next from con_tro into dich_vu;
+    
+    end loop get_list;
+    close con_tro;
+    end //
+    
+    call sp_3();
+
+-- Bó tay.com
+
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  yêu cầu 27  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
