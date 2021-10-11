@@ -1,51 +1,50 @@
 package model;
 
 public class Product {
-    private int product_id;
-    private String product_name;
-    private int product_amount;
-    private String product_description;
+    private int id;
+    private String name;
+    private String type;
+    private String description;
 
     public Product() {
-
     }
 
-    public Product(int product_id, String product_name, int product_amount, String product_description) {
-        this.product_id = product_id;
-        this.product_name = product_name;
-        this.product_amount = product_amount;
-        this.product_description = product_description;
+    public Product(int id, String name, String type, String description) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.description = description;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public int getId() {
+        return id;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getName() {
+        return name;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getProduct_amount() {
-        return product_amount;
+    public String getType() {
+        return type;
     }
 
-    public void setProduct_amount(int product_amount) {
-        this.product_amount = product_amount;
+    public void setType(String email) {
+        this.type = email;
     }
 
-    public String getProduct_description() {
-        return product_description;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProduct_description(String product_description) {
-        this.product_description = product_description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

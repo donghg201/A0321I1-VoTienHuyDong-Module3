@@ -12,12 +12,14 @@ public class ProductServiceImpl implements ProductService {
 
     static {
         products = new HashMap<>();
-        products.put(1, new Product(1, "Iphone", 5, "Luxury"));
-        products.put(2, new Product(2, "Samsung", 6, "Luxury"));
-        products.put(3, new Product(3, "Huawei", 7, "Luxury"));
-        products.put(4, new Product(4, "Oppo", 8, "Luxury"));
-        products.put(5, new Product(5, "Blackberry", 9, "Luxury"));
+        products.put(1, new Product(1, "Iphone", "vip", "Available"));
+        products.put(2, new Product(2, "Samsung", "vip", "Available"));
+        products.put(3, new Product(3, "Oppo", "vip", "Available"));
+        products.put(4, new Product(4, "Nokia", "vip", "Available"));
+        products.put(5, new Product(5, "Huawei", "vip", "Available"));
+        products.put(6, new Product(6, "LG", "vip", "Available"));
     }
+
 
     @Override
     public List<Product> findAll() {
@@ -26,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void save(Product product) {
-        products.put(product.getProduct_id(), product);
+        products.put(product.getId(), product);
     }
 
     @Override

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Macintos
-  Date: 10/10/2021
-  Time: 11:49
+  Date: 11/10/2021
+  Time: 15:17
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -25,16 +25,16 @@
         <legend>Product information</legend>
         <table>
             <tr>
-                <td>Product name: </td>
-                <td><input type="text" name="product_name" id="product_name" value="${requestScope["product"].getProduct_name()}"></td>
+                <td>Name: </td>
+                <td><input type="text" name="name" id="name" value="${requestScope["product"].getName()}"></td>
             </tr>
             <tr>
-                <td>Product amount: </td>
-                <td><input type="number" name="product_amount" id="product_amount" value="${requestScope["product"].getProduct_amount()}"></td>
+                <td>Type: </td>
+                <td><input type="text" name="type" id="type" value="${requestScope["product"].getType()}"></td>
             </tr>
             <tr>
-                <td>Product description: </td>
-                <td><input type="text" name="product_description" id="product_description" value="${requestScope["product"].getProduct_description()}"></td>
+                <td>Description: </td>
+                <td><input type="text" name="description" id="description" value="${requestScope["product"].getDescription()}"></td>
             </tr>
             <tr>
                 <td></td>
