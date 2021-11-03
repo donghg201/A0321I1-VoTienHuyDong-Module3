@@ -21,7 +21,7 @@
         <div class="form-group">
             <label for="customer_id">Id</label>
             <input type="number" class="form-control" id="customer_id" name="customer_id"
-                   placeholder="Enter customer id">
+                   placeholder="Enter customer id" required pattern="">
         </div>
         <div class="form-group">
             <label for="customer_type_id">Type of id</label>

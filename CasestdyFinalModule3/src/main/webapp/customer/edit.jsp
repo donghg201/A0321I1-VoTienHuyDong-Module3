@@ -21,31 +21,18 @@
         </a>
         <c:forEach items="customer" var="customer">
             <div class="form-group">
+                <label for="customer_id">ID</label>
+                <input type="number" class="form-control" id="customer_id" name="customer_id"
+                       placeholder="Enter customer id" value="${requestScope['customer'].customer_id}" readonly>
+            </div>
+            <div class="form-group">
                 <label for="customer_type_id">Type of id</label>
-                <select class="custom-select custom-select-sm" id="customer_type_id" name="customer_type_id">
-                    <c:choose>
-                        <c:when test="${customer.customer_type_id == 1}">
-                            Diamond
-                        </c:when>
-                        <c:when test="${customer.customer_type_id == 2}">
-                            Platinum
-                        </c:when>
-                        <c:when test="${customer.customer_type_id == 3}">
-                            Gold
-                        </c:when>
-                        <c:when test="${customer.customer_type_id == 4}">
-                            Silver
-                        </c:when>
-                        <c:when test="${customer.customer_type_id == 5}">
-                            Member
-                        </c:when>
-                    </c:choose>
-                    <option selected>Customer type id</option>
-                    <option value="1">Diamond</option>
-                    <option value="2">Platinum</option>
-                    <option value="3">Gold</option>
-                    <option value="4">Silver</option>
-                    <option value="5">Member</option>
+                <select class="custom-select custom-select-sm" id="customer_type_id" name="customer_type_id" value="${requestScope['customer'].customer_type_id}">
+                    <option value="1" ${requestScope['customer'].customer_type_id == 1 ? "selected": ""}>Diamond</option>
+                    <option value="2" ${requestScope['customer'].customer_type_id == 2 ? "selected": ""}>Platinum</option>
+                    <option value="3" ${requestScope['customer'].customer_type_id == 3 ? "selected": ""}>Gold</option>
+                    <option value="4" ${requestScope['customer'].customer_type_id == 4 ? "selected": ""}>Silver</option>
+                    <option value="5" ${requestScope['customer'].customer_type_id == 5 ? "selected": ""}>Member</option>
                 </select>
             </div>
             <div class="form-group">
@@ -64,8 +51,8 @@
                     <%--                   placeholder="Enter customer gender">--%>
                 <select class="form-control" id="customer_gender" name="customer_gender" value="${requestScope['customer'].customer_gender}">
                     <option selected>Gender</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
+                    <option value="1" ${requestScope['customer'].customer_gender == 1 ? "selected" : ""}>Male</option>
+                    <option value="2" ${requestScope['customer'].customer_gender == 2 ? "selected" : ""}>Female</option>
                 </select>
             </div>
             <div class="form-group">

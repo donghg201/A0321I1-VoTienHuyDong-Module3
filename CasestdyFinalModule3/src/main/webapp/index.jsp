@@ -17,7 +17,8 @@
     <div>
         <div class="row">
             <a class="col-sm-10">
-                <img src="https://farm5.staticflickr.com/4230/35108607076_fc9c72a7f4_o.png" style="height: 100px;width: 100px">
+                <img src="https://farm5.staticflickr.com/4230/35108607076_fc9c72a7f4_o.png"
+                     style="height: 100px;width: 100px">
             </a>
             <a class="col-sm-2 d-sm-inline float-sm-right align-middle" style="top:40px">
                 Nguyen Van A
@@ -32,7 +33,7 @@
                         <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Employee</a>
+                        <a class="nav-link" href="/employee">Employee</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/customer">Customer</a>
@@ -53,16 +54,18 @@
     </div>
     <div class="row">
         <div class="col-sm-3">
-            <div>Item one</div>
-            <div>Item Two</div>
-            <div>Item Three</div>
+            <img src="https://anhdepfree.com/wp-content/uploads/2020/04/anh-nen-cuc-dep-cho-dien-thoai.gif"
+                 style="width: 100%; height: 535px">
         </div>
-        <div class="col-sm-9 text-justify align-middle" style="height:500px">
-            Body
+        <div class="col-sm-9">
+            <img src="http://www.azaweb.net/upload/images/web-dep-nhat-the-gioi3(1).JPG" style="width: 100%;">
         </div>
     </div>
+    <div style="height: 50px">
+
+    </div>
     <div class="text-justify align-middle col-sm-12" style="height:50px">
-        Footer
+        <img src="https://iweb.tatthanh.com.vn/pic/3/blog/images/image(3177).png" style="width: 100%;">
     </div>
 </div>
 

@@ -23,9 +23,12 @@
         <a href="/" class="btn btn-warning">
             Home
         </a>
+        <form method="get" action="/customer?action=search">
+            <input name="action" value="search" hidden>
+            <input type="text" name="customerSearch">
+            <button class="btn btn-success">Search</button>
+        </form>
     </div>
-
-
     <table class="table" id="customer">
         <thead>
         <tr>

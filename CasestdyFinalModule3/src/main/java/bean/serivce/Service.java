@@ -6,16 +6,19 @@ public class Service {
     private double service_cost;
     private int service_max_people;
     private int rent_type_id;
+    private int service_type_id;
 
-    public Service(String service_name, int service_area, double service_cost, int service_max_people, int rent_type_id) {
+    public Service() {
+    }
+
+    public Service(String service_name, int service_area, double service_cost, int service_max_people, int rent_type_id, int service_type_id) {
         this.service_name = service_name;
         this.service_area = service_area;
         this.service_cost = service_cost;
         this.service_max_people = service_max_people;
         this.rent_type_id = rent_type_id;
+        this.service_type_id = service_type_id;
     }
-
-    public Service(){}
 
     public String getService_name() {
         return service_name;
@@ -55,5 +58,13 @@ public class Service {
 
     public void setRent_type_id(int rent_type_id) {
         this.rent_type_id = rent_type_id;
+    }
+
+    public int getService_type_id() {
+        return service_type_id;
+    }
+
+    public void setService_type_id(int service_type_id) {
+        this.service_type_id = service_type_id;
     }
 }

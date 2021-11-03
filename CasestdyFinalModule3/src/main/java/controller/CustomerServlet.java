@@ -1,7 +1,7 @@
 package controller;
 
 import bean.customer.Customer;
-import service.CustomerService;
+import service.itf.CustomerService;
 import service.impl.CustomerServiceImpl;
 
 import javax.servlet.*;
@@ -27,12 +27,25 @@ public class CustomerServlet extends HttpServlet {
             case "update":
                 showFormUpdateCustomer(request, response);
                 break;
-            case "delete":
-//                deleteCustomer(request,response);
+            case "search":
+                searchCustomer(request, response);
                 break;
             default:
                 showListCustomer(request, response);
                 break;
+        }
+    }
+
+    private void searchCustomer(HttpServletRequest request, HttpServletResponse response) {
+        String customerSearch = request.getParameter("customerSearch");
+        List<Customer> customerList = customerService.searchCustomerByName(customerSearch);
+        request.setAttribute("customerList", customerList);
+        try {
+            request.getRequestDispatcher("/customer/list.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -76,13 +89,13 @@ public class CustomerServlet extends HttpServlet {
                 addNewCustomer(request, response);
                 break;
             case "update":
-                updateCustomer(request,response);
+                updateCustomer(request, response);
                 break;
             case "delete":
-                deleteCustomer(request,response);
+                deleteCustomer(request, response);
                 break;
             default:
-
+                showListCustomer(request, response);
                 break;
         }
     }

@@ -1,9 +1,9 @@
 package service.impl;
 
 import bean.customer.Customer;
-import repositories.CustomerRepository;
+import repositories.itf.CustomerRepository;
 import repositories.impl.CustomerRepositoryImpl;
-import service.CustomerService;
+import service.itf.CustomerService;
 
 import java.util.List;
 
@@ -21,8 +21,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer selectCustomerById(int customerId) {
-        return customerRepository.selectCustomerById(customerId);
+    public Customer selectCustomerById(int customer_id) {
+        return customerRepository.selectCustomerById(customer_id);
     }
 
     @Override
@@ -31,12 +31,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomer(int customerId) {
-        customerRepository.deleteCustomer(customerId);
+    public void deleteCustomer(int customer_id) {
+        customerRepository.deleteCustomer(customer_id);
     }
 
     @Override
-    public List<Customer> searchCustomerByName(String customerName) {
-        return customerRepository.searchCustomerByName(customerName);
+    public List<Customer> searchCustomerByName(String customerSearch) {
+        return customerRepository.searchCustomerByName(customerSearch);
     }
 }

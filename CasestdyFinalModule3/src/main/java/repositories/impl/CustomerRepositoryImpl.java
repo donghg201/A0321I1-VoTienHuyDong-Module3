@@ -1,7 +1,7 @@
 package repositories.impl;
 
 import bean.customer.Customer;
-import repositories.CustomerRepository;
+import repositories.itf.CustomerRepository;
 import repositories.DBConnection;
 
 import java.sql.Connection;
@@ -79,7 +79,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public Customer selectCustomerById(int customerId) {
+    public Customer selectCustomerById(int customer_id) {
         Connection connection = DBConnection.getConnection();
         Customer customer = null;
         PreparedStatement preparedStatement = null;
@@ -87,7 +87,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         if (connection != null) {
             try {
                 preparedStatement = connection.prepareStatement("select * from casestudyFinalMd3.customer where customer_id = ?");
-                preparedStatement.setInt(1, customerId);
+                preparedStatement.setInt(1, customer_id);
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     customer = new Customer();
@@ -145,12 +145,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public void deleteCustomer(int customerId) {
+    public void deleteCustomer(int customer_id) {
         Connection connection = DBConnection.getConnection();
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement("delete from casestudyFinalMd3.customer where customer_id = ?");
-            preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(1, customer_id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -161,11 +161,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
                 e.printStackTrace();
             }
         }
-
     }
 
     @Override
-    public List<Customer> searchCustomerByName(String customerName) {
+    public List<Customer> searchCustomerByName(String customerSearch) {
         Connection connection = DBConnection.getConnection();
         List<Customer> customerList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
@@ -173,6 +172,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         if (connection != null) {
             try {
                 preparedStatement = connection.prepareStatement("select * from casestudyFinalMd3.customer where customer_name like ?");
+                preparedStatement.setString(1,"%"+customerSearch+"%");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int customer_id = resultSet.getInt("customer_id");
@@ -198,5 +198,41 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             }
         }
         return customerList;
+    }
+
+    @Override
+    public Customer findByName(String customerName) {
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Customer customer = null;
+        if (connection != null) {
+            try {
+                preparedStatement = connection.prepareStatement("select * from casestudyFinalMd3.customer where customer_name = ?;");
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    int customer_id = resultSet.getInt("customer_id");
+                    int customer_type_id = resultSet.getInt("customer_type_id");
+                    String customer_name = resultSet.getString("customer_name");
+                    String customer_birthday = resultSet.getString("customer_birthday");
+                    int customer_gender = resultSet.getInt("customer_gender");
+                    String customer_id_card = resultSet.getString("customer_id_card");
+                    String customer_phone = resultSet.getString("customer_phone");
+                    String customer_email = resultSet.getString("customer_email");
+                    String customer_address = resultSet.getString("customer_address");
+                    customer = new Customer(customer_id, customer_type_id, customer_name, customer_birthday,
+                            customer_gender, customer_id_card, customer_phone, customer_email, customer_address);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return customer;
     }
 }
